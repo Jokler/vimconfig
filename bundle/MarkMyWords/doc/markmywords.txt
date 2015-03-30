@@ -1,0 +1,120 @@
+*MarkMyWords.txt*	Arbitrary bookmarks for your files and Vim's help docs.
+
+
+			VIM REFERENCE MANUAL	by Barry Arthur
+
+
+Help on using MarkMyWords                                    *MarkMyWords*
+
+1. Introduction				|MarkMyWords-intro|
+2. Usage				|MarkMyWords-usage|
+3. Configuration			|MarkMyWords-configuration|
+
+==============================================================================
+ 1. INTRODUCTION                                       *MarkMyWords-intro*
+
+MarkMyWords provides persistent bookmarking of arbitrary lines in files and the
+Vim help system. Quickly and easily jump to bookmarked locations, even after
+restarting Vim.
+
+==============================================================================
+ 2. USAGE                                              *MarkMyWords-usage*
+
+                                                          *MMW_MarkLine()*
+Bookmarking a line~
+
+When inside a file or a Vim help file, place the cursor at a line you want to
+come back to later (i.e. "bookmark") via: >
+
+    :MMWMarkLine
+<
+or use the default mapping (<plug>MMW_MarkLine): >
+
+    <leader>ml
+<
+
+                                                            *MMW_Select()*
+Jumping to a Bookmark~
+
+Open up Vim and execute: >
+
+    :MMWSelect <tag>
+<
+where tag is the name you gave to that bookmark.
+
+Or use the default mapping (<plug>MMW_Select): >
+
+    <leader>'l
+<
+
+:MMWSelect also supports tab completion (see |wildchar|). Try typing * at the
+start of the tag for better expansion. |c_ctrl-d| will display a list of all
+bookmarks or those matching the currently entered partial.
+
+                                                            *MMW_Browse()*
+Browsing Bookmarks~
+
+Open up Vim and execute: >
+
+    :MMWBrowse
+<
+
+Or use the default mapping (<plug>MMW_Browse): >
+
+    <leader>mb
+<
+
+NOTE: Depends on https://github.com/dahu/VimFindsMe
+
+This opens a |VimFindsMe| browser which uses a live |:Filter| to search for the
+desired tag if you have https://github.com/dahu/Vimple installed. Pressing
+<enter> on a line from within the VFM browser will trigger |MMW_Select| on the
+related term.
+
+==============================================================================
+ 3. CONFIGURATION                              *MarkMyWords-configuration*
+
+The following aspects of MarkMyWords' behavior are configurable with entries
+like: >
+
+    let g:markmywords_tagfile = $HOME/markmywords.tags
+<
+in your |$MYVIMRC|.
+
+Options:~
+
+|'markmywords_tagfile'|		Set the location of the bookmark tags file.
+                                The default location is in MarkMyWords' plugin
+                                directory.
+
+Maps:~
+
+Override the default mappings shown here by providing your own maps in
+|$MYVIMRC| like so: >
+
+        nmap <leader>ml <plug>MMW_MarkLine
+        nmap <leader>'l <plug>MMW_Select
+        nmap <leader>mb <plug>MMW_Browse
+<
+
+Commands:~
+
+:MMWMarkLine                    Mark the current line. This will prompt for a
+                                bookmark name and store it in the tags file.
+
+:MMWSelect <tagname>            Jump to a previously bookmarked line, where
+                                tagname is the name of the bookmark. Tab (|wc|)
+                                completion and |c_ctrl-d| expansion while typing
+                                the tagname are supported.
+
+:MMWList                        Displays the list of bookmarks.
+
+:MMWBrowse                      Displays all bookmarks in a VimFindsMe window.
+                                Requires: https://github.com/dahu/VimFindsMe
+
+Functions:~
+
+MMW_ListTags()                  Returns the MMW bookmarks as a list.
+
+Template From: https://github.com/dahu/Area-41/
+  vim:tw=78:ts=8:ft=help:norl:
