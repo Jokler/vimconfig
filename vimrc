@@ -109,37 +109,37 @@ endif"}}}
 
 "set diffexpr=MyDiff()"{{{
 function MyDiff()
-  let opt = '-a --binary '
-  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  let arg1 = v:fname_in
-  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  let arg2 = v:fname_new
-  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  let arg3 = v:fname_out
-  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  if $VIMRUNTIME =~ ' '
-     if &sh =~ '\<cmd'
-       if empty(&shellxquote)
-	 let l:shxq_sav = ''
-	 set shellxquote&
-       endif
-       let cmd = '"' . $VIMRUNTIME . '\diff"'
-     else
-       let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-     endif
-   else
-     let cmd = $VIMRUNTIME . '\diff'
-   endif
-   silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
-   if exists('l:shxq_sav')
-     let &shellxquote=l:shxq_sav
-   endif
+	let opt = '-a --binary '
+	if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+	if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+	let arg1 = v:fname_in
+	if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+	let arg2 = v:fname_new
+	if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+	let arg3 = v:fname_out
+	if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+	if $VIMRUNTIME =~ ' '
+		if &sh =~ '\<cmd'
+			if empty(&shellxquote)
+				let l:shxq_sav = ''
+				set shellxquote&
+			endif
+			let cmd = '"' . $VIMRUNTIME . '\diff"'
+		else
+			let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+		endif
+	else
+		let cmd = $VIMRUNTIME . '\diff'
+	endif
+	silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
+	if exists('l:shxq_sav')
+		let &shellxquote=l:shxq_sav
+	endif
 endfunction
 
 if !exists(":DiffOrig")
-  command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
-		  \ | wincmd p | diffthis
+	command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
+	\ | wincmd p | diffthis
 endif"}}}
 
 "Airline"{{{
@@ -164,8 +164,8 @@ nmap <leader>bs :CtrlPMRU<cr>
 
 "ignore
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
-  \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
+	\ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
+	\ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
 \}"}}}
 
 set noexpandtab
@@ -180,12 +180,12 @@ set ignorecase			" case insensitive searching
 set smartcase			" except when using capitals
 
 if has('mouse')
-  set mouse=a  " In many terminal emulators the mouse works just fine, thus enable it.
+	set mouse=a  " In many terminal emulators the mouse works just fine, thus enable it.
 endif
 
 if version >= 600
-  set foldenable
-  set foldmethod=marker
+	set foldenable
+	set foldmethod=marker
 endif
 
 if has("win32")
@@ -200,21 +200,14 @@ else
 	let $MYVIMRC="~/.vim/vimrc"
 end
 
-" Example Vimrc"{{{
-" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
-" so that you can undo CTRL-U after inserting a line break.
-inoremap <C-U> <C-G>u<C-U>
-
-" Only do this part when compiled with support for autocommands.
 if has("autocmd")
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it when the position is invalid or when inside an event handler
-  autocmd BufReadPost *
-    \ if line("'\"") > 1 && line("'\"") <= line("$") |
-    \   exe "normal! g`\"" |
-    \ endif
-  augroup END
+	" When editing a file, always jump to the last known cursor position.
+	" Don't do it when the position is invalid or when inside an event handler
+	autocmd BufReadPost *
+	\ if line("'\"") > 1 && line("'\"") <= line("$") |
+	\  exe "normal! g`\"" |
+	\ endif
+	augroup END
 else
-  set autoindent  " always set autoindenting on
-endif " has("autocmd")"}}}
-
+	set autoindent
+endif
