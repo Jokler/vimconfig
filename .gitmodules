@@ -31,3 +31,6 @@
 [submodule "bundle/ZoomWin"]
 	path = bundle/ZoomWin
 	url = http://github.com/vim-scripts/ZoomWin.git
+[submodule "bundle/L9"]
+	path = bundle/L9
+	url = http://github.com/vim-scripts/L9.git
