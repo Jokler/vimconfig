@@ -1,51 +1,12 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required for Vundle
+set nocompatible
+filetype off
 
-" Vundle"{{{
-" set the runtime path to include Vundle and initialize
-set rtp+=~/vimfiles/bundle/Vundle.vim/
-let path='~/vimfiles/bundle'
-
-call vundle#begin(path) " alternatively, pass a path where Vundle should install plugins
-Plugin 'https://github.com/gmarik/Vundle.vim.git' " let Vundle manage Vundle, required
-
-Plugin 'tpope/vim-fugitive'					" plugin on GitHub repo
-Plugin 'L9'
-"Plugin 'vim-scripts/L9', {'name': 'newL9'}
-"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}	" Avoid a name conflict with L9
-"-----------------------------------------------
-"-----------------My plugins--------------------
-"-----------------------------------------------
-"Plugin 'Shougo/unite.vim'
-"Plugin 'Shougo/neomru.vim'
-"Plugin 'Shougo/vimproc'
-
-Plugin 'bling/vim-airline'					" Airline
-Plugin 'Lokaltog/vim-easymotion'			" Easymotion
-Plugin 'terryma/vim-multiple-cursors'		" Multiple Cursors for Visual etc
-Plugin 'scrooloose/nerdtree'				" NERDTree
-Plugin 'tpope/vim-surround'					" For easier editing of delimiters
-Plugin 'scrooloose/nerdcommenter'			" Quick commenting
-Plugin 'kien/ctrlp.vim'						" Ctrl-P to browse dirs
-Plugin 'dahu/MarkMyWords'					" Tags
-Plugin 'vim-scripts/ZoomWin'				" Zooming in windows
-
-if has("unix")
-	Plugin 'Valloric/YouCompleteMe'				" YouCompleteMe Linux only
-else
-	Plugin 'othree/vim-autocomplpop'			" Pop Autocomplete
-end
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-" Put your non-Plugin stuff after this line"}}}
+" set the runtime path to include Pathogen and initialize
+set rtp+=~/vimfiles/bundle/vim-pathogen/
+execute pathogen#infect()
+"Plugin 'Valloric/YouCompleteMe'				" YouCompleteMe Linux only
+"Plugin 'othree/vim-autocomplpop'			" Pop Autocomplete
+filetype plugin indent on
 
 "Keymaps"{{{
 let mapleader=","
@@ -148,6 +109,7 @@ set encoding=utf-8 " Necessary to show Unicode glyphs
 
 "Activate fancy fonts
 let g:airline_powerline_fonts = 0
+let g:airline_theme="powerlineish"
 
 "Buffers
 " Enable the list of buffers
@@ -172,6 +134,7 @@ set noexpandtab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
+set backspace=indent,eol,start " allow backspacing over everything in insert mode
 
 set history=50			" keep 50 lines of command line history
 set incsearch			" do incremental searching

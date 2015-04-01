@@ -6,6 +6,7 @@ This vim configuration is just intended for me, don´t expect it to work out of 
 * ln -s ~/.vim/vimrc ~/.vimrc
 * cd ~/.vim
 * git submodule update --init
+* Run ":Helptags" in Vim
 
 ####Windows
 * Open the command prompt as admin
@@ -14,3 +15,9 @@ This vim configuration is just intended for me, don´t expect it to work out of 
 * mklink ./_vimrc ./vimfiles/vimrc
 * cd ./vimfiles
 * git submodule update --init
+* Run ":Helptags" in Vim
+
+###Updates
+To update run either 
+"git pull origin master" for my configuration or 
+"git submodule foreach git pull origin master" for the latest updates of the plugins.
