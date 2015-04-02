@@ -25,6 +25,7 @@
 [submodule "bundle/MarkMyWords"]
 	path = bundle/MarkMyWords
 	url = http://github.com/dahu/MarkMyWords.git
+	ignore = dirty
 [submodule "bundle/ZoomWin"]
 	path = bundle/ZoomWin
 	url = http://github.com/vim-scripts/ZoomWin.git

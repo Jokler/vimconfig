@@ -2,9 +2,13 @@ set nocompatible
 filetype off
 
 " set the runtime path to include Pathogen and initialize
-set rtp+=~/vimfiles/bundle/vim-pathogen/
+if has("win32")
+	set rtp+=~/vimfiles/bundle/vim-pathogen/
+else
+	set rtp+=~/.vim/bundle/vim-pathogen/
+endif
 execute pathogen#infect()
-"Plugin 'Valloric/YouCompleteMe'				" YouCompleteMe Linux only
+"Plugin 'Valloric/YouCompleteMe'			" YouCompleteMe Linux only
 "Plugin 'othree/vim-autocomplpop'			" Pop Autocomplete
 filetype plugin indent on
 
@@ -24,8 +28,9 @@ inoremap jk <ESC>
 inoremap kj <ESC>
 nmap <S-Enter> O<Esc>
 nmap <CR> o<Esc>
-cmap w!! w !sudo tee > /dev/null %
-
+if has("unix")
+	cmap w!! w !sudo tee > /dev/null %
+endif
 
 set hidden
 nmap <leader>T :enew<cr>
@@ -107,9 +112,8 @@ endif"}}}
 set laststatus=2   " Always show the statusline
 set encoding=utf-8 " Necessary to show Unicode glyphs
 
-"Activate fancy fonts
-let g:airline_powerline_fonts = 0
-let g:airline_theme="powerlineish"
+let g:airline_powerline_fonts = 0	"Activate fancy fonts with 1
+let g:airline_theme="powerlineish"	"Change the visual style
 
 "Buffers
 " Enable the list of buffers
