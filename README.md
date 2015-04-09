@@ -14,7 +14,7 @@ This vim configuration is just intended for me, don´t expect it to work out of 
 * cd %USERPROFILE%
 * git clone https://github.com/Jokler/vimconfig.git ./vimfiles
 * mklink "/_vimrc" "./vimfiles/vimrc"
-* mkdir ./vimtmp/
+* mkdir "./vimtmp/"
 * cd ./vimfiles
 * git submodule update --init
 * Run ":Helptags" in Vim
