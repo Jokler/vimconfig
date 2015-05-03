@@ -16,6 +16,9 @@ filetype plugin indent on
 let mapleader=","
 "map <Leader> <Plug>(easymotion-prefix)
 
+nnoremap <C-L> :nohl<CR><C-L>   " Redraw and remove highlighting
+map Y y$                        " Make Y work like D and C
+
 map <F10> :NERDTreeToggle<CR>   " Toggle nerdtree with F10
 map <F9> :NERDTreeFind<CR>      " Current file in nerdtree
 
@@ -32,23 +35,11 @@ if has("unix")
     cmap w!! w !sudo tee > /dev/null %
 endif
 
-set hidden
 nmap <leader>T :enew<cr>
 nmap <leader>l :bnext<CR>
 nmap <leader>h :bprevious<CR>
 nmap <leader>bq :bp <BAR> bd #<CR>
-nmap <leader>bl :ls<CR>
-
-" Quicker window movement"{{{
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
-" Easy navigation between splits. Instead of ctrl-w + j. Just ctrl-j
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>"}}}"}}}
+nmap <leader>bl :ls<CR>"}}}
 
 "Visual settings"{{{
 if has('gui_running')
@@ -69,8 +60,8 @@ endif
 
 " Switch syntax highlighting on, when the terminal has colors
 if &t_Co > 2 || has("gui_running")
-  syntax on
-  set hlsearch
+    syntax on
+    set hlsearch
 endif"}}}
 
 "set diffexpr=MyDiff()"{{{
@@ -140,6 +131,8 @@ set softtabstop=4
 set shiftwidth=4
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 
+set hidden              " Doesn't complain about switching unsaved buffers
+set wildmenu            " Better command-line completion
 set history=50          " keep 50 lines of command line history
 set incsearch           " do incremental searching
 set scrolloff=2         " let's you see the next lines
