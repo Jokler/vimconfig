@@ -12,35 +12,6 @@ execute pathogen#infect()
 "Plugin 'othree/vim-autocomplpop'           " Pop Autocomplete
 filetype plugin indent on
 
-"Keymaps"{{{
-let mapleader=","
-"map <Leader> <Plug>(easymotion-prefix)
-
-nnoremap <C-L> :nohl<CR><C-L>   " Redraw and remove highlighting
-map Y y$                        " Make Y work like D and C
-
-map <F10> :NERDTreeToggle<CR>   " Toggle nerdtree with F10
-map <F9> :NERDTreeFind<CR>      " Current file in nerdtree
-
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
-
-inoremap jk <ESC>
-inoremap kj <ESC>
-nmap <S-Enter> O<Esc>
-nmap <CR> o<Esc>
-if has("unix")
-    cmap w!! w !sudo tee > /dev/null %
-endif
-
-nmap <leader>T :enew<cr>
-nmap <leader>l :bnext<CR>
-nmap <leader>h :bprevious<CR>
-nmap <leader>bq :bp <BAR> bd #<CR>
-nmap <leader>bl :ls<CR>"}}}
-
 "Visual settings"{{{
 if has('gui_running')
     set guiheadroom=0
@@ -125,6 +96,12 @@ let g:ctrlp_custom_ignore = {
     \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
 \}"}}}
 
+" NERDTree"{{{
+let NERDTreeChDirMode=2
+map <F10> :NERDTreeToggle<CR>   " Toggle nerdtree with F10
+map <F9> :NERDTreeFind<CR>      " Current file in nerdtree"}}}
+
+" General Settings"{{{
 set expandtab
 set tabstop=4
 set softtabstop=4
@@ -137,7 +114,33 @@ set history=50          " keep 50 lines of command line history
 set incsearch           " do incremental searching
 set scrolloff=2         " let's you see the next lines
 set ignorecase          " case insensitive searching
-set smartcase           " except when using capitals
+set smartcase           " except when using capitals"}}}
+
+" General Keymaps"{{{
+let mapleader=","
+"map <Leader> <Plug>(easymotion-prefix)
+
+nnoremap <C-L> :nohl<CR><C-L>   " Redraw and remove highlighting
+map Y y$                        " Make Y work like D and C
+
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
+
+inoremap jk <ESC>
+inoremap kj <ESC>
+nmap <S-Enter> O<Esc>
+nmap <CR> o<Esc>
+if has("unix")
+    cmap w!! w !sudo tee > /dev/null %
+endif
+
+nmap <leader>T :enew<cr>
+nmap <leader>l :bnext<CR>
+nmap <leader>h :bprevious<CR>
+nmap <leader>bq :bp <BAR> bd #<CR>
+nmap <leader>bl :ls<CR>"}}}
 
 if has('mouse')
     set mouse=a  " In many terminal emulators the mouse works just fine, thus enable it.
