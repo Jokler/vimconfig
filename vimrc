@@ -93,7 +93,7 @@ nmap <leader>bs :CtrlPMRU<cr>
 "ignore
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
-    \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
+    \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg|ico)$',
 \}"}}}
 
 " NERDTree"{{{
@@ -122,11 +122,6 @@ let mapleader=","
 
 nnoremap <C-L> :nohl<CR><C-L>   " Redraw and remove highlighting
 map Y y$                        " Make Y work like D and C
-
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
 
 inoremap jk <ESC>
 inoremap kj <ESC>
