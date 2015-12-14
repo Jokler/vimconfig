@@ -8,8 +8,6 @@ else
     set rtp+=~/.vim/bundle/vim-pathogen/
 endif
 execute pathogen#infect()
-"Plugin 'Valloric/YouCompleteMe'            " YouCompleteMe Linux only
-"Plugin 'othree/vim-autocomplpop'           " Pop Autocomplete
 filetype plugin indent on
 
 "Visual settings"{{{
@@ -125,13 +123,13 @@ map Y y$                        " Make Y work like D and C
 
 inoremap jk <ESC>
 inoremap kj <ESC>
-nmap <S-Enter> O<Esc>
-nmap <CR> o<Esc>
+nmap <S-Enter> O<ESC>
+nmap <CR> o<ESC>
 if has("unix")
     cmap w!! w !sudo tee > /dev/null %
 endif
 
-nmap <leader>T :enew<cr>
+nmap <leader>T :enew<CR>
 nmap <leader>l :bnext<CR>
 nmap <leader>h :bprevious<CR>
 nmap <leader>bq :bp <BAR> bd #<CR>
@@ -147,7 +145,7 @@ if version >= 600
 endif
 
 if has("win32")
-    map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>     "Fullscreen
+    map <F11> <ESC>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>     "Fullscreen
     "Move backups to vimtmp
     set backupdir=~/vimtmp,.
     set directory=~/vimtmp//,.
