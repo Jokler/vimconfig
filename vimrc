@@ -129,6 +129,13 @@ if has("unix")
     cmap w!! w !sudo tee > /dev/null %
 endif
 
+" Remap s to insert a single char and allow repetition like 5s
+function! RepeatChar(char, count)
+  return repeat(a:char, a:count)
+endfunction
+nnoremap s :<C-U>exec "normal i".RepeatChar(nr2char(getchar()), v:count1)<CR>
+nnoremap S :<C-U>exec "normal a".RepeatChar(nr2char(getchar()), v:count1)<CR>
+
 nmap <leader>T :enew<CR>
 nmap <leader>l :bnext<CR>
 nmap <leader>h :bprevious<CR>
