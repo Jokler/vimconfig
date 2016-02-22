@@ -2,3 +2,5 @@ vim-autocomplpop/
 YouCompleteMe/
 doc/tags
 doc/tags-ja
+eclim
+eclim.vim

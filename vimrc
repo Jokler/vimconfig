@@ -99,6 +99,11 @@ let NERDTreeChDirMode=2
 map <F10> :NERDTreeToggle<CR>   " Toggle nerdtree with F10
 map <F9> :NERDTreeFind<CR>      " Current file in nerdtree"}}}
 
+" UltiSnips"{{{
+let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>""}}}
+
 " General Settings"{{{
 set expandtab
 set tabstop=4
