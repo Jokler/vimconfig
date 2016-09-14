@@ -10,30 +10,30 @@ endif
 execute pathogen#infect()
 filetype plugin indent on
 
-"Visual settings"{{{
+" Visual settings"{{{
 if has('gui_running')
     set guiheadroom=0
     colorscheme space2
     set number
     set lines=60 columns=108 linespace=0
     if has('gui_win32')
-        set guifont=Droid_Sans_Mono:h10:cANSI
+        set guifont=Droid_Sans_Mono:h12:cANSI
     else
-        set guifont=Droid\ Sans\ Mono\ 10
+        set guifont=Droid\ Sans\ Mono\ 12
     endif
-    set go-=m   "Menu bar
-    set go-=T   "Toolbar
-    set go-=r   "right scrollbar
-    set go-=L   "left scrollbar
+    set go-=m   " Menu bar
+    set go-=T   " Toolbar
+    set go-=r   " Right scrollbar
+    set go-=L   " Left scrollbar
 endif
 
-" Switch syntax highlighting on, when the terminal has colors
+" Switch syntax highlighting on, if the terminal has colors
 if &t_Co > 2 || has("gui_running")
     syntax on
     set hlsearch
 endif"}}}
 
-"set diffexpr=MyDiff()"{{{
+" set diffexpr=MyDiff()"{{{
 function MyDiff()
     let opt = '-a --binary '
     if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
@@ -68,31 +68,32 @@ if !exists(":DiffOrig")
     \ | wincmd p | diffthis
 endif"}}}
 
-"Airline"{{{
+" Airline"{{{
 set laststatus=2   " Always show the statusline
 set encoding=utf-8 " Necessary to show Unicode glyphs
 
-let g:airline_powerline_fonts = 0   "Activate fancy fonts with 1
-let g:airline_theme="powerlineish"  "Change the visual style
+let g:airline_powerline_fonts = 0   " Activate fancy fonts with 1
+let g:airline_theme="powerlineish"  " Change the visual style
 
-"Buffers
+" Buffers
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'"}}}
 
-"CtrlP"{{{
+" CtrlP"{{{
 
-"buffer settings
+" buffer settings
 nmap <leader>bb :CtrlPBuffer<cr>
 nmap <leader>bm :CtrlPMixed<cr>
 nmap <leader>bs :CtrlPMRU<cr>
 
-"ignore
+" ignore
 let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
-    \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg|ico)$',
-\}"}}}
+    \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site|build)$',
+    \ 'file': '\v\.(exe|so|rlib|dll|class|png|jpg|jpeg|ico)$',
+\}
+let g:OmniSharp_selector_ui = 'ctrlp'"}}}
 
 " NERDTree"{{{
 let NERDTreeChDirMode=2
@@ -103,6 +104,9 @@ map <F9> :NERDTreeFind<CR>      " Current file in nerdtree"}}}
 let g:UltiSnipsExpandTrigger="<tab>"
 "let g:UltiSnipsJumpForwardTrigger="<c-b>"
 "let g:UltiSnipsJumpBackwardTrigger="<c-z>""}}}
+
+autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+set completeopt-=preview
 
 " General Settings"{{{
 set expandtab
@@ -117,14 +121,35 @@ set history=50          " keep 50 lines of command line history
 set incsearch           " do incremental searching
 set scrolloff=2         " let's you see the next lines
 set ignorecase          " case insensitive searching
-set smartcase           " except when using capitals"}}}
+set smartcase           " except when using capitals
+
+if has('mouse')
+    set mouse=a
+endif
+
+if version >= 600
+    set foldenable
+    set foldmethod=marker
+endif
+
+if has("win32")
+    map <F11> <ESC>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR> "Fullscreen
+    " Move backups to vimtmp
+    set backupdir=~/vimtmp,.
+    set directory=~/vimtmp//,.
+    let $MYVIMRC="~/vimfiles/vimrc"
+else
+    set backupdir=~/.vimtmp,.
+    set directory=~/.vimtmp//,.
+    let $MYVIMRC="~/.vim/vimrc"
+end"}}}
 
 " General Keymaps"{{{
 let mapleader=","
 "map <Leader> <Plug>(easymotion-prefix)
 
-nnoremap <C-L> :nohl<CR><C-L>   " Redraw and remove highlighting
-map Y y$                        " Make Y work like D and C
+nnoremap <C-L> :nohl<CR><C-L>   "Redraw and remove highlighting
+map Y y$                        "Make Y work like D and C
 
 inoremap jk <ESC>
 inoremap kj <ESC>
@@ -147,28 +172,7 @@ nmap <leader>h :bprevious<CR>
 nmap <leader>bq :bp <BAR> bd #<CR>
 nmap <leader>bl :ls<CR>"}}}
 
-if has('mouse')
-    set mouse=a  " In many terminal emulators the mouse works just fine, thus enable it.
-endif
-
-if version >= 600
-    set foldenable
-    set foldmethod=marker
-endif
-
-if has("win32")
-    map <F11> <ESC>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>     "Fullscreen
-    "Move backups to vimtmp
-    set backupdir=~/vimtmp,.
-    set directory=~/vimtmp//,.
-    let $MYVIMRC="~/vimfiles/vimrc"
-else
-    set backupdir=~/.vimtmp,.
-    set directory=~/.vimtmp//,.
-    let $MYVIMRC="~/.vim/vimrc"
-end
-
-"Autocmd"{{{
+" Autocmd"{{{
 if has("autocmd")
     " When editing a file, always jump to the last known cursor position.
     " Don't do it when the position is invalid or when inside an event handler

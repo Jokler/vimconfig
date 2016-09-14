@@ -32,6 +32,9 @@ hi Folded           gui=bold guibg=#384048 guifg=#a0a8b0 ctermbg=4   ctermfg=248
 hi Title            gui=bold guifg=#f6f3e8 guibg=NONE    ctermfg=254 cterm=bold
 hi Visual           gui=bold guifg=#faf4c6 guibg=#3c414c ctermfg=254 ctermbg=4
 hi SpecialKey       gui=bold guifg=#808080 guibg=#343434 ctermfg=244 ctermbg=236
+hi Search           gui=bold guifg=#151515 guibg=#2090d0
+hi WildMenu         gui=bold guifg=#151515 guibg=#2090d0
+hi ErrorMsg         gui=bold guifg=#ff9d00 guibg=#800101
 
 let c1 = '#2090d0'
 let c2 = '#606060'
