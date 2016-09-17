@@ -21,10 +21,10 @@ if has('gui_running')
     else
         set guifont=Droid\ Sans\ Mono\ 12
     endif
-    set go-=m   " Menu bar
-    set go-=T   " Toolbar
-    set go-=r   " Right scrollbar
-    set go-=L   " Left scrollbar
+    set go-=m|   " Menu bar
+    set go-=T|   " Toolbar
+    set go-=r|   " Right scrollbar
+    set go-=L|   " Left scrollbar
 endif
 
 " Switch syntax highlighting on, if the terminal has colors
@@ -69,11 +69,11 @@ if !exists(":DiffOrig")
 endif"}}}
 
 " Airline"{{{
-set laststatus=2   " Always show the statusline
-set encoding=utf-8 " Necessary to show Unicode glyphs
+set laststatus=2|   " Always show the statusline
+set encoding=utf-8| " Necessary to show Unicode glyphs
 
-let g:airline_powerline_fonts = 0   " Activate fancy fonts with 1
-let g:airline_theme="powerlineish"  " Change the visual style
+let g:airline_powerline_fonts = 0|   " Activate fancy fonts with 1
+let g:airline_theme="powerlineish"|  " Change the visual style
 
 " Buffers
 " Enable the list of buffers
@@ -97,8 +97,8 @@ let g:OmniSharp_selector_ui = 'ctrlp'"}}}
 
 " NERDTree"{{{
 let NERDTreeChDirMode=2
-map <F10> :NERDTreeToggle ~/<CR>   " Toggle nerdtree with F10
-map <F9> :NERDTreeFind<CR>      " Current file in nerdtree"}}}
+map <F10> :NERDTreeToggle ~/<CR>|   " Toggle nerdtree with F10
+map <F9> :NERDTreeFind<CR>|      " Current file in nerdtree"}}}
 
 " UltiSnips"{{{
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -113,15 +113,15 @@ set expandtab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set backspace=indent,eol,start " allow backspacing over everything in insert mode
+set backspace=indent,eol,start| " allow backspacing over everything in insert mode
 
-set hidden              " Doesn't complain about switching unsaved buffers
-set wildmenu            " Better command-line completion
-set history=50          " keep 50 lines of command line history
-set incsearch           " do incremental searching
-set scrolloff=2         " let's you see the next lines
-set ignorecase          " case insensitive searching
-set smartcase           " except when using capitals
+set hidden|              " Doesn't complain about switching unsaved buffers
+set wildmenu|            " Better command-line completion
+set history=50|          " keep 50 lines of command line history
+set incsearch|           " do incremental searching
+set scrolloff=2|         " let's you see the next lines
+set ignorecase|          " case insensitive searching
+set smartcase|           " except when using capitals
 
 if has('mouse')
     set mouse=a
@@ -133,7 +133,7 @@ if version >= 600
 endif
 
 if has("win32")
-    map <F11> <ESC>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR> "Fullscreen
+    map <F11> <ESC>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>| "Fullscreen
     " Move backups to vimtmp
     set backupdir=~/vimtmp,.
     set directory=~/vimtmp//,.
@@ -148,8 +148,8 @@ end"}}}
 let mapleader=","
 "map <Leader> <Plug>(easymotion-prefix)
 
-nnoremap <C-L> :nohl<CR><C-L>   "Redraw and remove highlighting
-map Y y$                        "Make Y work like D and C
+nnoremap <C-L> :nohl<CR><C-L>|   "Redraw and remove highlighting
+map Y y$|                        "Make Y work like D and C
 
 inoremap jk <ESC>
 inoremap kj <ESC>
