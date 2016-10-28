@@ -1,6 +1,4 @@
-" Maintainer:   Josh Parnell
-" Version:      1.3
-" Last Change:  3.23.2014
+" Original Creator:   Josh Parnell
 
 set background=dark
 hi clear

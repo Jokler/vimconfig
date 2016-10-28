@@ -8,6 +8,7 @@ else
     set rtp+=~/.vim/bundle/vim-pathogen/
 endif
 execute pathogen#infect()
+
 filetype plugin indent on
 
 " Visual settings"{{{
@@ -105,6 +106,8 @@ let g:UltiSnipsExpandTrigger="<tab>"
 "let g:UltiSnipsJumpForwardTrigger="<c-b>"
 "let g:UltiSnipsJumpBackwardTrigger="<c-z>""}}}
 
+set diffopt+=vertical
+
 autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
 set completeopt-=preview
 
@@ -176,11 +179,7 @@ nmap <leader>bl :ls<CR>"}}}
 if has("autocmd")
     " When editing a file, always jump to the last known cursor position.
     " Don't do it when the position is invalid or when inside an event handler
-    autocmd BufReadPost *
-    \ if line("'\"") > 1 && line("'\"") <= line("$") |
-    \  exe "normal! g`\"" |
-    \ endif
-    augroup END
+    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 else
     set autoindent
 endif"}}}
