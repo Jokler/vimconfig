@@ -136,7 +136,6 @@ if version >= 600
 endif
 
 if has("win32")
-    map <F11> <ESC>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>| "Fullscreen
     " Move backups to vimtmp
     set backupdir=~/vimtmp,.
     set directory=~/vimtmp//,.
@@ -166,8 +165,8 @@ endif
 function! RepeatChar(char, count)
   return repeat(a:char, a:count)
 endfunction
-nnoremap s :<C-U>exec "normal i".RepeatChar(nr2char(getchar()), v:count1)<CR>
-nnoremap S :<C-U>exec "normal a".RepeatChar(nr2char(getchar()), v:count1)<CR>
+nnoremap S :<C-U>exec "normal i".RepeatChar(nr2char(getchar()), v:count1)<CR>
+nnoremap s :<C-U>exec "normal a".RepeatChar(nr2char(getchar()), v:count1)<CR>
 
 nmap <leader>T :enew<CR>
 nmap <leader>l :bnext<CR>
