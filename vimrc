@@ -18,9 +18,9 @@ if has('gui_running')
     set number
     set lines=60 columns=108 linespace=0
     if has('gui_win32')
-        set guifont=Droid_Sans_Mono:h12:cANSI
+        set guifont=Droid_Sans_Mono:h11:cANSI
     else
-        set guifont=Droid\ Sans\ Mono\ 12
+        set guifont=Droid\ Sans\ Mono\ 11
     endif
     set go-=m|   " Menu bar
     set go-=T|   " Toolbar
@@ -74,6 +74,8 @@ set laststatus=2|   " Always show the statusline
 set encoding=utf-8| " Necessary to show Unicode glyphs
 
 let g:airline_powerline_fonts = 0|   " Activate fancy fonts with 1
+let g:airline_left_sep=''|           " Disable seperators
+let g:airline_right_sep=''
 let g:airline_theme="powerlineish"|  " Change the visual style
 
 " Buffers
