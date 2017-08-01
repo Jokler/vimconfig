@@ -4,3 +4,5 @@ doc/tags
 doc/tags-ja
 eclim
 eclim.vim
+spell/*.utf-8.add
+spell/*.utf-8.add.spl
