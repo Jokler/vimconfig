@@ -36,7 +36,7 @@ hi ErrorMsg         gui=bold guifg=#ff9d00 guibg=#800101
 hi DiffAdd          gui=bold guibg=#1e2319
 hi DiffChange       gui=bold guibg=#192223
 hi DiffDelete       gui=bold guifg=#a08700 guibg=#2f221d
-hi DiffText         gui=bold guibg=#2f221d
+hi DiffText         gui=bold guifg=#ddbb99 guibg=#2f221d
 
 let c1 = '#2090d0'
 let c2 = '#606060'
