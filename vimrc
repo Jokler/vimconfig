@@ -168,7 +168,7 @@ else
 end"}}}
 
 " General Keymaps"{{{
-let mapleader=","
+let mapleader=" "
 "map <Leader> <Plug>(easymotion-prefix)
 
 nnoremap <C-L> :nohl<CR><C-L>|   "Redraw and remove highlighting
@@ -188,6 +188,11 @@ function! RepeatChar(char, count)
 endfunction
 nnoremap S :<C-U>exec "normal i".RepeatChar(nr2char(getchar()), v:count1)<CR>
 nnoremap s :<C-U>exec "normal a".RepeatChar(nr2char(getchar()), v:count1)<CR>
+
+noremap <leader>y "*y
+noremap <leader>p "*p
+noremap <leader>Y "*y
+noremap <leader>P "*p
 
 nmap <leader>T :enew<CR>
 nmap <leader>l :bnext<CR>
