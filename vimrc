@@ -87,50 +87,6 @@ if !exists(":DiffOrig")
     \ | wincmd p | diffthis
 endif"}}}
 
-" Airline"{{{
-set laststatus=2|   " Always show the statusline
-set encoding=utf-8| " Necessary to show Unicode glyphs
-
-let g:airline_powerline_fonts = 0|   " Activate fancy fonts with 1
-let g:airline_left_sep=''|           " Disable seperators
-let g:airline_right_sep=''
-let g:airline_theme="powerlineish"|  " Change the visual style
-
-" Buffers
-" Enable the list of buffers
-let g:airline#extensions#tabline#enabled = 1
-" Show just the filename
-let g:airline#extensions#tabline#fnamemod = ':t'"}}}
-
-" CtrlP"{{{
-
-" buffer settings
-nmap <leader>bb :CtrlPBuffer<cr>
-nmap <leader>bm :CtrlPMixed<cr>
-nmap <leader>bs :CtrlPMRU<cr>
-
-" ignore
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site|build)$',
-    \ 'file': '\v\.(exe|so|rlib|dll|class|png|jpg|jpeg|ico)$',
-\}
-let g:OmniSharp_selector_ui = 'ctrlp'"}}}
-
-" NERDTree"{{{
-let NERDTreeChDirMode=2
-map <F10> :NERDTreeToggle ~/<CR>|   " Toggle nerdtree with F10
-map <F9> :NERDTreeFind<CR>|      " Current file in nerdtree"}}}
-
-" UltiSnips"{{{
-let g:UltiSnipsExpandTrigger="<tab>"
-"let g:UltiSnipsJumpForwardTrigger="<c-b>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-z>""}}}
-
-set diffopt+=vertical
-
-autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
-set completeopt-=preview
-
 " General Settings"{{{
 set expandtab
 set tabstop=4
@@ -214,3 +170,47 @@ if has("autocmd")
 else
     set autoindent
 endif"}}}
+
+" Airline"{{{
+set laststatus=2|   " Always show the statusline
+set encoding=utf-8| " Necessary to show Unicode glyphs
+
+let g:airline_powerline_fonts = 1|   " Activate fancy fonts with 1
+let g:airline_left_sep=''|           " Disable seperators
+let g:airline_right_sep=''
+let g:airline_theme="onedark"|  " Change the visual style
+
+" Buffers
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1|"}}}
+
+" CtrlP"{{{
+
+" buffer settings
+nmap <leader>bb :CtrlPBuffer<cr>
+nmap <leader>bm :CtrlPMixed<cr>
+nmap <leader>bs :CtrlPMRU<cr>
+
+" ignore
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site|build)$',
+    \ 'file': '\v\.(exe|so|rlib|dll|class|png|jpg|jpeg|ico)$',
+\}
+let g:OmniSharp_selector_ui = 'ctrlp'"}}}
+
+" NERDTree"{{{
+let NERDTreeChDirMode=2
+map <F10> :NERDTreeToggle ~/<CR>|   " Toggle nerdtree with F10
+map <F9> :NERDTreeFind<CR>|      " Current file in nerdtree"}}}
+
+" UltiSnips"{{{
+let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>""}}}
+
+set diffopt+=vertical
+
+autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+set completeopt-=preview
+let g:vimtex_view_method = 'mupdf'
+let g:tex_flavor = "latex"
