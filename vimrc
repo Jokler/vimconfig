@@ -14,7 +14,6 @@ filetype plugin indent on
 " Visual settings"{{{
 if has('gui_running')
     set guiheadroom=0
-    set number
     set lines=60 columns=108 linespace=0
     if has('gui_win32')
         set guifont=Droid_Sans_Mono:h11:cANSI
@@ -139,13 +138,14 @@ set softtabstop=4
 set shiftwidth=4
 set backspace=indent,eol,start| " allow backspacing over everything in insert mode
 
-set hidden|              " Doesn't complain about switching unsaved buffers
-set wildmenu|            " Better command-line completion
-set history=50|          " keep 50 lines of command line history
-set incsearch|           " do incremental searching
-set scrolloff=2|         " let's you see the next lines
-set ignorecase|          " case insensitive searching
-set smartcase|           " except when using capitals
+set hidden|                 " Doesn't complain about switching unsaved buffers
+set wildmenu|               " Better command-line completion
+set history=50|             " keep 50 lines of command line history
+set incsearch|              " do incremental searching
+set number relativenumber|  " Hybrid line numbers
+set scrolloff=2|            " let's you see the next lines
+set ignorecase|             " case insensitive searching
+set smartcase|              " except when using capitals
 
 if has('mouse')
     set mouse=a
@@ -205,6 +205,12 @@ if has("autocmd")
     " When editing a file, always jump to the last known cursor position.
     " Don't do it when the position is invalid or when inside an event handler
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+    augroup numbertoggle
+      autocmd!
+      autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+      autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+    augroup END
 else
     set autoindent
 endif"}}}
