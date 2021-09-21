@@ -152,8 +152,8 @@ noremap <leader>Y "*y
 noremap <leader>P "*p
 
 nmap <leader>T :enew<CR>
-nmap <leader>l :bnext<CR>
-nmap <leader>h :bprevious<CR>
+nmap <leader>i :bnext<CR>
+nmap <leader>k :bprevious<CR>
 nmap <leader>bq :bp <BAR> bd #<CR>
 nmap <leader>bl :ls<CR>"}}}
 
