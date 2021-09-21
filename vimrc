@@ -102,6 +102,7 @@ set number relativenumber|  " Hybrid line numbers
 set scrolloff=2|            " let's you see the next lines
 set ignorecase|             " case insensitive searching
 set smartcase|              " except when using capitals
+set autoread|               " reload changed files automatically
 
 if has('mouse')
     set mouse=a
