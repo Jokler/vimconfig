@@ -98,11 +98,15 @@ set hidden|                 " Doesn't complain about switching unsaved buffers
 set wildmenu|               " Better command-line completion
 set history=50|             " keep 50 lines of command line history
 set incsearch|              " do incremental searching
-set number relativenumber|  " Hybrid line numbers
+"set number relativenumber|  " Hybrid line numbers
+set number|                 " Line numbers
 set scrolloff=2|            " let's you see the next lines
 set ignorecase|             " case insensitive searching
 set smartcase|              " except when using capitals
 set autoread|               " reload changed files automatically
+set updatetime=100|         " Milliseconds until swap file is written (makes gitgutter faster)
+set signcolumn=yes|         " Always show the column for errors/gitgutter
+"set signcolumn=number|       " Merge the column for errors/gitgutter with line numbers
 
 if has('mouse')
     set mouse=a
@@ -155,7 +159,37 @@ nmap <leader>T :enew<CR>
 nmap <leader>i :bnext<CR>
 nmap <leader>k :bprevious<CR>
 nmap <leader>bq :bp <BAR> bd #<CR>
-nmap <leader>bl :ls<CR>"}}}
+nmap <leader>bl :ls<CR>
+
+" Makes word motions follow CamelCase/snake_case
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
+map <silent> e <Plug>CamelCaseMotion_e
+map <silent> ge <Plug>CamelCaseMotion_ge
+sunmap w
+sunmap b
+sunmap e
+sunmap ge
+
+" same for word object motions
+omap <silent> iw <Plug>CamelCaseMotion_iw
+xmap <silent> iw <Plug>CamelCaseMotion_iw
+omap <silent> ib <Plug>CamelCaseMotion_ib
+xmap <silent> ib <Plug>CamelCaseMotion_ib
+omap <silent> ie <Plug>CamelCaseMotion_ie
+xmap <silent> ie <Plug>CamelCaseMotion_ie
+
+" and insert mode motions
+imap <silent> <S-Left> <C-o><Plug>CamelCaseMotion_b
+imap <silent> <S-Right> <C-o><Plug>CamelCaseMotion_w
+"}}}
+
+nnoremap <F5> :UndotreeToggle<CR>
+autocmd FileType go nmap gtj :CocCommand go.tags.add json<cr>
+autocmd FileType go nmap gtx :CocCommand go.tags.clear<cr>
+nnoremap <silent> <Leader>f :Rg<CR>
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 
 " Autocmd"{{{
 if has("autocmd")
@@ -163,11 +197,13 @@ if has("autocmd")
     " Don't do it when the position is invalid or when inside an event handler
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-    augroup numbertoggle
-      autocmd!
-      autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-      autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-    augroup END
+    autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
+
+    "augroup numbertoggle
+      "autocmd!
+      "autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+      "autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+    "augroup END
 else
     set autoindent
 endif"}}}
@@ -194,24 +230,183 @@ nmap <leader>bs :CtrlPMRU<cr>
 
 " ignore
 let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site|build)$',
-    \ 'file': '\v\.(exe|so|rlib|dll|class|png|jpg|jpeg|ico)$',
+    \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site|build|target|node_modules)$',
+    \ 'file': '\v(main(\.)@!|(\.(exe|so|rlib|dll|class|png|jpg|jpeg|ico|zip))$)',
 \}
-let g:OmniSharp_selector_ui = 'ctrlp'"}}}
-
-" NERDTree"{{{
-let NERDTreeChDirMode=2
-map <F10> :NERDTreeToggle ~/<CR>|   " Toggle nerdtree with F10
-map <F9> :NERDTreeFind<CR>|      " Current file in nerdtree"}}}
 
 " UltiSnips"{{{
 let g:UltiSnipsExpandTrigger="<tab>"
-"let g:UltiSnipsJumpForwardTrigger="<c-b>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-z>""}}}
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 set diffopt+=vertical
 
-autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
 set completeopt-=preview
-let g:vimtex_view_method = 'mupdf'
+let g:vimtex_view_method = 'zathura'
 let g:tex_flavor = "latex"
+"}}}
+
+let g:conflict_marker_begin = '^<<<<<<< .*$'
+let g:conflict_marker_end   = '^>>>>>>> .*$'
+
+highlight ConflictMarkerBegin guibg=#004400 gui=bold
+highlight ConflictMarkerOurs guibg=#004400
+highlight ConflictMarkerTheirs guibg=#440000
+highlight ConflictMarkerEnd guibg=#440000 gui=bold
+
+" --column: Show column number
+" --line-number: Show line number
+" --no-heading: Do not show file headings in results
+" --fixed-strings: Search term as a literal string
+" --hidden: Search hidden files and folders
+" --follow: Follow symlinks
+" --color: Search color options
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --follow --color "always" '.shellescape(<q-args>), 1, <bang>0)
+
+
+"let g:go_fmt_command = "golines"
+
+" nvim config
+
+" Give more space for displaying messages.
+"set cmdheight=2
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+"inoremap <silent><expr> <TAB>
+      "\ pumvisible() ? "\<C-n>" :
+      "\ CheckBackspace() ? "\<TAB>" :
+      "\ coc#refresh()
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+"function! CheckBackspace() abort
+  "let col = col('.') - 1
+  "return !col || getline('.')[col - 1]  =~# '\s'
+"endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> coc#pum#visible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+"xmap <leader>f  <Plug>(coc-format-selected)
+"nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Run the Code Lens action on the current line.
+nmap <leader>cl  <Plug>(coc-codelens-action)
+
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
+
+" Use CTRL-S for selections ranges.
+" Requires 'textDocument/selectionRange' support of language server.
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocActionAsync('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
+
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Mappings for CoCList
+" Show all diagnostics.
+"nnoremap <silent><nowait> <leader>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent><nowait> <leader>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent><nowait> <leader>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent><nowait> <leader>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent><nowait> <leader>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+"nnoremap <silent><nowait> <leader>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+"nnoremap <silent><nowait> <leader>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+"nnoremap <silent><nowait> <leader>p  :<C-u>CocListResume<CR>

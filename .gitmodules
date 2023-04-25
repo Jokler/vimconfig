@@ -10,16 +10,9 @@
 [submodule "bundle/nerdcommenter"]
 	path = bundle/nerdcommenter
 	url = http://github.com/scrooloose/nerdcommenter.git
-[submodule "bundle/vim-multiple-cursors"]
-	path = bundle/vim-multiple-cursors
-	url = http://github.com/terryma/vim-multiple-cursors.git
 [submodule "bundle/vim-easymotion"]
 	path = bundle/vim-easymotion
 	url = http://github.com/Lokaltog/vim-easymotion.git
-[submodule "bundle/ZoomWin"]
-	path = bundle/ZoomWin
-	url = http://github.com/vim-scripts/ZoomWin.git
-	ignore = dirty
 [submodule "bundle/L9"]
 	path = bundle/L9
 	url = http://github.com/vim-scripts/L9.git
@@ -57,3 +50,31 @@
 [submodule "bundle/vim-go"]
 	path = bundle/vim-go
 	url = https://github.com/fatih/vim-go
+[submodule "bundle/vim-terraform"]
+	path = bundle/vim-terraform
+	url = https://github.com/hashivim/vim-terraform.git
+[submodule "bundle/conflict-marker.vim"]
+	path = bundle/conflict-marker.vim
+	url = https://github.com/rhysd/conflict-marker.vim
+[submodule "bundle/undotree"]
+	path = bundle/undotree
+	url = https://github.com/mbbill/undotree.git
+[submodule "bundle/coc.nvim"]
+	path = bundle/coc.nvim
+	url = https://github.com/neoclide/coc.nvim.git
+	branch = release
+[submodule "bundle/fzf.vim"]
+	path = bundle/fzf.vim
+	url = https://github.com/junegunn/fzf.vim
+[submodule "bundle/vim-gitgutter"]
+	path = bundle/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
+[submodule "bundle/splitjoin.vim"]
+	path = bundle/splitjoin.vim
+	url = https://github.com/AndrewRadev/splitjoin.vim
+[submodule "bundle/CamelCaseMotion"]
+	path = bundle/CamelCaseMotion
+	url = https://github.com/bkad/CamelCaseMotion
+[submodule "bundle/vim-case-convert"]
+	path = bundle/vim-case-convert
+	url = https://github.com/chiedojohn/vim-case-convert.git
