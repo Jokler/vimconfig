@@ -1,60 +1,79 @@
 [submodule "bundle/ctrlp.vim"]
 	path = bundle/ctrlp.vim
 	url = http://github.com/kien/ctrlp.vim.git
+	branch = master
 [submodule "bundle/vim-airline"]
 	path = bundle/vim-airline
 	url = http://github.com/bling/vim-airline.git
+	branch = master
 [submodule "bundle/vim-surround"]
 	path = bundle/vim-surround
 	url = http://github.com/tpope/vim-surround.git
+	branch = master
 [submodule "bundle/nerdcommenter"]
 	path = bundle/nerdcommenter
 	url = http://github.com/scrooloose/nerdcommenter.git
+	branch = master
 [submodule "bundle/vim-easymotion"]
 	path = bundle/vim-easymotion
 	url = http://github.com/Lokaltog/vim-easymotion.git
+	branch = master
 [submodule "bundle/vim-pathogen"]
 	path = bundle/vim-pathogen
 	url = https://github.com/tpope/vim-pathogen
+	branch = master
 [submodule "bundle/vimwiki"]
 	path = bundle/vimwiki
 	url = https://github.com/vimwiki/vimwiki
+	branch = master
 [submodule "bundle/ultisnips"]
 	path = bundle/ultisnips
 	url = https://github.com/SirVer/ultisnips
+	branch = master
 [submodule "bundle/vim-airline-themes"]
 	path = bundle/vim-airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes.git
+	branch = master
 [submodule "bundle/rust.vim"]
 	path = bundle/rust.vim
 	url = https://github.com/rust-lang/rust.vim.git
+	branch = master
 [submodule "bundle/vimtex"]
 	path = bundle/vimtex
 	url = https://github.com/lervag/vimtex
+	branch = master
 [submodule "bundle/diffconflicts"]
 	path = bundle/diffconflicts
 	url = https://github.com/whiteinge/diffconflicts
+	branch = master
 [submodule "bundle/onedark.vim"]
 	path = bundle/onedark.vim
 	url = https://github.com/joshdick/onedark.vim
+	branch = main
 [submodule "bundle/ron.vim"]
 	path = bundle/ron.vim
 	url = https://github.com/ron-rs/ron.vim
+	branch = master
 [submodule "bundle/supertab"]
 	path = bundle/supertab
 	url = https://github.com/ervandew/supertab
+	branch = master
 [submodule "bundle/vim-go"]
 	path = bundle/vim-go
 	url = https://github.com/fatih/vim-go
+	branch = master
 [submodule "bundle/vim-terraform"]
 	path = bundle/vim-terraform
 	url = https://github.com/hashivim/vim-terraform.git
+	branch = master
 [submodule "bundle/conflict-marker.vim"]
 	path = bundle/conflict-marker.vim
 	url = https://github.com/rhysd/conflict-marker.vim
+	branch = master
 [submodule "bundle/undotree"]
 	path = bundle/undotree
 	url = https://github.com/mbbill/undotree.git
+	branch = master
 [submodule "bundle/coc.nvim"]
 	path = bundle/coc.nvim
 	url = https://github.com/neoclide/coc.nvim.git
@@ -62,15 +81,28 @@
 [submodule "bundle/fzf.vim"]
 	path = bundle/fzf.vim
 	url = https://github.com/junegunn/fzf.vim
+	branch = master
 [submodule "bundle/vim-gitgutter"]
 	path = bundle/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
+	branch = main
 [submodule "bundle/splitjoin.vim"]
 	path = bundle/splitjoin.vim
 	url = https://github.com/AndrewRadev/splitjoin.vim
+	branch = master
 [submodule "bundle/CamelCaseMotion"]
 	path = bundle/CamelCaseMotion
 	url = https://github.com/bkad/CamelCaseMotion
+	branch = master
 [submodule "bundle/vim-case-convert"]
 	path = bundle/vim-case-convert
 	url = https://github.com/chiedojohn/vim-case-convert.git
+	branch = master
+[submodule "bundle/yuck.vim"]
+	path = bundle/yuck.vim
+	url = https://github.com/elkowar/yuck.vim
+	branch = master
+[submodule "bundle/nvim-colorizer.lua"]
+	path = bundle/nvim-colorizer.lua
+	url = https://github.com/norcalli/nvim-colorizer.lua
+	branch = master
