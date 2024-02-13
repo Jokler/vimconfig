@@ -201,6 +201,13 @@ if has("autocmd")
 
     autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
 
+    " Language based indentation settings
+    autocmd FileType sh setlocal shiftwidth=2 tabstop=2 softtabstop=2
+    autocmd FileType bash setlocal shiftwidth=2 tabstop=2 softtabstop=2
+    autocmd FileType PKGBUILD setlocal shiftwidth=2 tabstop=2 softtabstop=2
+    autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
+    autocmd FileType go setlocal noexpandtab
+
     "augroup numbertoggle
       "autocmd!
       "autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
